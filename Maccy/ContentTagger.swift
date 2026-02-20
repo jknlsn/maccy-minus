@@ -44,7 +44,7 @@ struct ContentTagger {
       "\\[(INFO|ERROR|WARN|DEBUG)\\]",
       "stack trace", "Traceback", "at \\S+\\(\\S+:\\d+\\)"
     ]
-    if matchesAny(text, patterns: logPatterns, threshold: 2) {
+    if matchesAny(text, patterns: logPatterns, threshold: 1) {
       return .logs
     }
 

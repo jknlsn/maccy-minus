@@ -5,11 +5,10 @@ import Logging
 struct XmlTagWrapper {
   private static let logger = Logger(label: "org.p0deje.Maccy.XmlTagWrapper")
 
-  /// Reads clipboard, classifies, wraps in XML tags, and pastes into
-  /// the frontmost application.
+  /// Wraps clipboard text in XML tags. Called on key-down.
   @MainActor
-  static func wrapAndPaste() {
-    logger.info("wrapAndPaste triggered")
+  static func wrapClipboard() {
+    logger.info("wrapClipboard triggered")
 
     let pasteboard = NSPasteboard.general
     guard let text = pasteboard.string(forType: .string), !text.isEmpty else {
@@ -22,8 +21,7 @@ struct XmlTagWrapper {
     if ContentTag.allCases.contains(where: {
       trimmed.hasPrefix("<\($0.rawValue)>") && trimmed.hasSuffix("</\($0.rawValue)>")
     }) {
-      logger.info("Already wrapped, pasting as-is")
-      Clipboard.shared.paste()
+      logger.info("Already wrapped, skipping")
       return
     }
 
@@ -32,17 +30,20 @@ struct XmlTagWrapper {
     logger.info("Classified as '\(tag.rawValue)'")
 
     // Suppress Maccy from recording the wrapped version as a new history item.
-    let wasIgnoring = Defaults[.ignoreEvents]
     Defaults[.ignoreEvents] = true
 
     pasteboard.clearContents()
     pasteboard.setString(wrapped, forType: .string)
     Clipboard.shared.changeCount = pasteboard.changeCount
 
-    Clipboard.shared.paste()
+    Defaults[.ignoreEvents] = false
+  }
 
-    if !wasIgnoring {
-      Defaults[.ignoreEvents] = false
-    }
+  /// Pastes the current clipboard contents. Called on key-up,
+  /// when the user's shortcut modifier keys are physically released.
+  @MainActor
+  static func pasteClipboard() {
+    logger.info("pasteClipboard triggered (key-up)")
+    Clipboard.shared.paste()
   }
 }
