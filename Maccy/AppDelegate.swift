@@ -92,6 +92,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     migrateUserDefaults()
     disableUnusedGlobalHotkeys()
 
+    KeyboardShortcuts.onKeyDown(for: .wrapInXmlTags) {
+      Task { @MainActor in
+        XmlTagWrapper.wrapAndPaste()
+      }
+    }
+
     panel = FloatingPanel(
       contentRect: NSRect(origin: .zero, size: Defaults[.windowSize]),
       identifier: Bundle.main.bundleIdentifier ?? "org.p0deje.Maccy",

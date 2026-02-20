@@ -64,6 +64,14 @@ struct GeneralSettingsPane: View {
 
       Settings.Section(
         bottomDivider: true,
+        label: { Text("WrapInXmlTags", tableName: "GeneralSettings") }
+      ) {
+        KeyboardShortcuts.Recorder(for: .wrapInXmlTags)
+          .help(Text("WrapInXmlTagsTooltip", tableName: "GeneralSettings"))
+      }
+
+      Settings.Section(
+        bottomDivider: true,
         label: { Text("Search", tableName: "GeneralSettings") }
       ) {
         Picker("", selection: $searchMode) {
