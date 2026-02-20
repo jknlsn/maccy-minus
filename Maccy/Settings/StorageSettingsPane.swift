@@ -58,6 +58,7 @@ struct StorageSettingsPane: View {
 
   @Default(.size) private var size
   @Default(.sortBy) private var sortBy
+  @Default(.deduplicateStrings) private var deduplicateStrings
 
   @State private var viewModel = ViewModel()
   @State private var storageSize = Storage.shared.size
@@ -118,6 +119,15 @@ struct StorageSettingsPane: View {
         .labelsHidden()
         .frame(width: 160, alignment: .leading)
         .help(Text("SortByTooltip", tableName: "StorageSettings"))
+      }
+
+      Settings.Section(label: { Text("Duplicates", tableName: "StorageSettings") }) {
+        Toggle(isOn: $deduplicateStrings) {
+          Text("DeduplicateStrings", tableName: "StorageSettings")
+        }
+        Text("DeduplicateStringsDescription", tableName: "StorageSettings")
+          .controlSize(.small)
+          .foregroundStyle(.gray)
       }
     }
   }

@@ -12,3 +12,7 @@
 "FirstCopiedAt" = "Time of first copy";
 "NumberOfCopies" = "Number of copies";
 "SortByTooltip" = "Default: Time of last copy.";
+
+"Duplicates" = "Duplicates:";
+"DeduplicateStrings" = "Remove duplicate text";
+"DeduplicateStringsDescription" = "When enabled, duplicate text entries are removed, keeping only the most recent.";
