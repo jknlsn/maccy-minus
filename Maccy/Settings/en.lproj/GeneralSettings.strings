@@ -22,3 +22,5 @@
 "NotificationsAndSounds" = "Notifications and sounds 􀱁";
 "WrapInXmlTags" = "Wrap in XML tags:";
 "WrapInXmlTagsTooltip" = "Global shortcut to wrap clipboard text in XML tags based on detected content type (e.g. <logs>, <code>, <article>).\nReplaces clipboard contents; original remains in Maccy history.\nNo default shortcut — must be configured to enable.";
+"AlwaysUseAIClassification" = "Always use AI classification";
+"AlwaysUseAIClassificationTooltip" = "Bypass heuristic rules and always use Foundation Models for content classification.\nRequires macOS 26+ with Apple Intelligence enabled.\nFalls back to heuristics if unavailable.";

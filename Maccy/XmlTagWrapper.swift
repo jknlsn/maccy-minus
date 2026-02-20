@@ -7,7 +7,7 @@ struct XmlTagWrapper {
 
   /// Wraps clipboard text in XML tags. Called on key-down.
   @MainActor
-  static func wrapClipboard() {
+  static func wrapClipboard() async {
     logger.info("wrapClipboard triggered")
 
     let pasteboard = NSPasteboard.general
@@ -25,8 +25,8 @@ struct XmlTagWrapper {
       return
     }
 
-    let tag = ContentTagger.classify(text)
-    let wrapped = ContentTagger.wrap(text)
+    let tag = await ContentTagger.classify(text)
+    let wrapped = await ContentTagger.wrap(text)
     logger.info("Classified as '\(tag.rawValue)'")
 
     // Suppress Maccy from recording the wrapped version as a new history item.

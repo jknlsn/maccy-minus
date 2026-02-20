@@ -68,6 +68,10 @@ struct GeneralSettingsPane: View {
       ) {
         KeyboardShortcuts.Recorder(for: .wrapInXmlTags)
           .help(Text("WrapInXmlTagsTooltip", tableName: "GeneralSettings"))
+        Defaults.Toggle(key: .alwaysUseFoundationModels) {
+          Text("AlwaysUseAIClassification", tableName: "GeneralSettings")
+        }
+        .help(Text("AlwaysUseAIClassificationTooltip", tableName: "GeneralSettings"))
       }
 
       Settings.Section(

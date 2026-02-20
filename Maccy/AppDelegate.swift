@@ -94,7 +94,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     KeyboardShortcuts.onKeyDown(for: .wrapInXmlTags) {
       Task { @MainActor in
-        XmlTagWrapper.wrapClipboard()
+        await XmlTagWrapper.wrapClipboard()
       }
     }
     KeyboardShortcuts.onKeyUp(for: .wrapInXmlTags) {
